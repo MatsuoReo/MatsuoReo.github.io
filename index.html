@@ -1,14 +1,21 @@
-<!doctype html>
-<html lang="ja">
-
-<head>
+ <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hello</title>
-</head>
+    <title>Hello Button</title>
+    <!-- ✅ CSSフォルダのstyle.cssを読み込み -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Hello 👋</h1>
 
-<body>
-    <h1>Hello</h1>
-</body>
+    <!-- 👇 ボタンを追加 -->
+    <button class="btn">押してみて！</button>
 
+    <script>
+      // クリック動作（任意）
+      document.querySelector(".btn").addEventListener("click", () => {
+        alert("こんにちは！");
+      });
+    </script>
+  </body>
 </html>
