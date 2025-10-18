@@ -16,11 +16,11 @@ body {
     position: relative;
 }
 
-.templeimg {
+.chaiimg {
     position: absolute;
-    top: 229px;
+    top: 180px;
     width: 154px;
-    height: 154px;
+    height: 203px;
     left: 50%;
     transform: translateX(-50%);
     aspect-ratio: 1/1;
