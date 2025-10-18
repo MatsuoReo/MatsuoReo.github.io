@@ -16,11 +16,11 @@ body {
     position: relative;
 }
 
-.bookimg {
+.templeimg {
     position: absolute;
     top: 229px;
-    width: 154px;
-    height: 154px;
+    width: 128.3333px;
+    height: 134.75px;
     left: 50%;
     transform: translateX(-50%);
     aspect-ratio: 1/1;
@@ -48,7 +48,6 @@ body {
 
 }
 
-
 .subText {
     position: absolute;
     top: 466px;
@@ -64,8 +63,6 @@ body {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-
-
     margin: 0;
 
 }

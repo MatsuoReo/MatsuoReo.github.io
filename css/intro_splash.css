@@ -120,3 +120,20 @@ body {
         pulseOpacity 1.5s ease-in-out 2.1s infinite;
     will-change: opacity;
 }
+
+
+@keyframes pageLeave {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.pageLeave {
+    animation: pageLeave 300ms ease forwards;
+    pointer-events: none;
+    /* ダブルタップ防止 */
+}
