@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
+    background: #D1AB74;
+    color: #111;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.heroLogo {
+    position: absolute;
+    top: 172px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 324px;
+    height: 328px;
+    z-index: 2;
+}
+
+.bgLeft {
+    position: absolute;
+    top: 461px;
+    left: -18px;
+    width: 145px;
+    height: 302px;
+    z-index: 0;
+}
+
+.bgRight {
+    position: absolute;
+    top: 442px;
+    left: 260px;
+    width: 138px;
+    height: 287px;
+    z-index: 0;
+}
+
+.heroTextImg {
+    position: absolute;
+    top: 529px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 314.5542px;
+    height: 107px;
+    z-index: 2;
+}
+
+.ctaHint {
+    position: absolute;
+    top: 695px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    width: 181px;
+    height: 33px;
+    padding-right: 6.77px;
+    color: #FFF;
+    text-align: center;
+    font-family: Poppins, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1;
+    flex-shrink: 0;
+    z-index: 3;
+}
+
+/* Keyframes */
+@keyframes fadeInSimul {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulseOpacity {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .3;
+    }
+}
+
+.heroLogo,
+.bgLeft,
+.bgRight {
+    opacity: 0;
+    animation: fadeInSimul 0.8s ease-in 0.8s forwards;
+    will-change: opacity;
+}
+
+/* テキスト画像：1.4s後に0.3sフェード */
+.heroTextImg {
+    opacity: 0;
+    animation: fadeInSimul 0.3s ease-in 1.4s forwards;
+    will-change: opacity;
+}
+
+/* “タップして次へ”：2.0s後に0.3sフェード → 2.1sから1.5s周期で点滅 */
+.ctaHint {
+    opacity: 0;
+    animation:
+        fadeInSimul 0.3s ease-in 2s forwards,
+        pulseOpacity 1.5s ease-in-out 2.1s infinite;
+    will-change: opacity;
+}

@@ -1,0 +1,132 @@
+/* ===============================
+   チャイ診断 ファーストビューCSS（スマホ対応＋装飾付き）
+   =============================== */
+
+   :root {
+    --bg: #D1AB74;
+    --text: #3C2F21;
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body {
+    height: 100%;
+    width: 100%;
+  }
+  
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* ===== コンテナ ===== */
+  .intro-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+             env(safe-area-inset-bottom) env(safe-area-inset-left);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  /* ===== ロゴ ===== */
+  .intro-logo {
+    position: relative;
+    top: 12vh; /* 中央より少し上（縦方向の約60%位置） */
+    width: 70vw;
+    max-width: 320px;
+    height: auto;
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));
+  }
+  
+  /* ===== タイトル（チャイ） ===== */
+  .intro-title {
+    margin-top: 2rem;
+    font-size: clamp(2.4rem, 8vw, 3.6rem);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+  }
+  
+  /* ===== サブテキスト ===== */
+  .intro-sub {
+    position: absolute;
+    bottom: 9vh;
+    font-size: 0.9rem;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.6em 1.4em;
+    border-radius: 999px;
+    animation: blink 2s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  
+  /* ===== 装飾イラスト（左右下） ===== */
+  .decor {
+    position: absolute;
+    width: 35vw;
+    max-width: 160px;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  
+  .decor-left {
+    bottom: 0;
+    left: -5vw;
+  }
+  
+  .decor-right {
+    bottom: 0;
+    right: -5vw;
+  }
+  
+  /* ===== 全画面タップ領域 ===== */
+  .intro-enter {
+    position: absolute;
+    inset: 0;
+    text-indent: -9999px;
+    cursor: pointer;
+  }
+  
+  /* ===== notch・安全領域考慮 ===== */
+  @supports (padding: max(0px)) {
+    body {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  }
+  
+  /* ===== 小さい画面最適化 ===== */
+  @media (max-height: 640px) {
+    .intro-logo {
+      top: 8vh;
+      width: 55vw;
+      margin-bottom: 1rem;
+    }
+    .intro-title {
+      font-size: 2rem;
+    }
+    .intro-sub {
+      bottom: 6vh;
+      font-size: 0.8rem;
+    }
+  }
+  
