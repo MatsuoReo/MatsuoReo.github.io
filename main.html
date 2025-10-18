@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>チャチャイのチャイ</title>
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+
+    <header class="hdr" aria-label="ページ見出し">
+        <h1 class="hdr-text">Home</h1>
+        <hr class="hdr-line">
+    </header>
+
+    <section class="enb">
+        <button class="enbBtn" type="button" data-next="intro_about1.html" aria-label="神様診断をはじめる">
+            <span class="enb__ttl" aria-hidden="true">神様診断</span>
+            <span class="enb__lead" aria-hidden="true">診断結果をもとに、チャイに<br>トッピングを追加いたします</span>
+            <div class="enb__panel">
+                <span class="enb__panelTxt">診断開始 ＞</span>
+            </div>
+        </button>
+    </section>
+
+    <section class="cards" aria-label="情報カード">
+
+        <button class="card card--action" type="button" data-next="detail_chai.html" aria-label="チャイの詳細へ">
+            <h3 class="card__ttl">チャイ</h3>
+            <p class="card__lead">チャイの歴史やアレルギー、<br>原材料などについて</p>
+
+            <span class="card__btn isDisabled" aria-disabled="true">
+                <span class="card__btnTxt">詳しくはこちら　＞</span>
+            </span>
+            <img class="card__ill" src="img/book.png" alt="" aria-hidden="true">
+        </button>
+
+        <button class="card card--action" type="button" data-next="detail_god.html" aria-label="神様の詳細へ">
+            <h3 class="card__ttl">神様</h3>
+            <p class="card__lead">チャイの歴史やアレルギー、<br>原材料などについて</p>
+
+            <span class="card__btn isDisabled" aria-disabled="true">
+                <span class="card__btnTxt">詳しくはこちら ＞</span>
+            </span>
+
+            <img class="card__ill" src="img/book.png" alt="" aria-hidden="true">
+        </button>
+    </section>
+</body>
+
+</html>
