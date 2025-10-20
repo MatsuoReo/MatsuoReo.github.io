@@ -1,0 +1,341 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
+    background: #D1AB74;
+    color: #111;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+
+.hdr {
+    position: relative;
+    margin-top: 68px;
+    height: 36px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.hdr .hdr-text {
+    margin: 0;
+    line-height: 36px;
+    color: #000;
+    text-align: center;
+    font-family: "Rounded Mplus 1c Bold";
+    font-size: 25px;
+    font-weight: 700;
+}
+
+/* 罫線は高さ36pxの“下端”に固定 */
+.hdr .hdr-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #000;
+    border: 0;
+    margin: 0;
+}
+
+
+/* ========== 診断本体ラッパー ========== */
+.quiz {
+    width: min(94vw, 720px);
+    margin: 0px auto 96px;
+    /* 下は余白広め（フッター想定があれば調整） */
+    display: grid;
+    gap: 0px;
+}
+
+/* ========== 質問カード ========== */
+.qcard {
+    padding-top: 13px;
+}
+
+
+.qcard__head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 29px;
+}
+
+.qcard__no {
+    display: flex;
+    width: 26px;
+    height: 24px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #000;
+    text-align: center;
+    font-family: "Noto Sans";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 50px;
+}
+
+.qcard__title {
+    display: flex;
+    width: 306px;
+    height: 22px;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #000;
+    text-align: center;
+    font-family: "Noto Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 50px;
+}
+
+.qcard__form {
+    margin: 0;
+}
+
+.qcard__fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.qcard__choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 29px;
+    /* ボタン間の隙間 */
+}
+
+.choice input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.choice__pill {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 72px;
+    padding: 14px 12px;
+    text-align: center;
+    border-color: #593618;
+    background: #F3EADC;
+    color: #593618;
+    border-radius: 14px;
+    border: 2px solid transparent;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .12);
+    cursor: pointer;
+    user-select: none;
+    font: 700 12px/1.5 "Noto Sans JP", "Hiragino Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background-color .12s ease;
+}
+
+
+.choice:active .choice__pill {
+    transform: scale(.98);
+}
+
+.choice input:checked+.choice__pill {
+    border-color: #593618;
+    background: #F3EADC;
+    color: #593618;
+    box-shadow: 0 12px 18px rgba(0, 0, 0, .16);
+}
+
+
+.qcard__choices:has(input:checked) .choice__pill {
+    opacity: .45;
+    transition: opacity .12s ease;
+}
+
+.choice input:checked+.choice__pill {
+    opacity: 1;
+}
+
+
+.choice--checkleft .choice__pill {
+    position: relative;
+}
+
+
+.choice--checkleft .choice__pill::before,
+.choice--checkleft .choice__pill::after {
+    position: absolute;
+    left: 28px;
+    top: 50%;
+    opacity: 0;
+    transition: opacity .12s ease, transform .12s ease;
+}
+
+
+.choice--checkleft .choice__pill::after {
+    content: "";
+    position: absolute;
+    left: 28px;
+    top: 50%;
+    width: 12px;
+    height: 7px;
+    border-left: 3px solid #593618;
+    border-bottom: 3px solid #593618;
+    transform: translate(-50%, -50%) rotate(-45deg) scale(.8);
+    opacity: 0;
+    transition: opacity .12s ease, transform .12s ease;
+}
+
+
+.qcard__choices::after {
+    content: "";
+    display: block;
+    grid-column: 1 / -1;
+    /* 2カラムでも1カラムでも横幅いっぱいに */
+    height: 1px;
+    background: #949494;
+}
+
+
+.choice--checkleft input:checked+.choice__pill::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-45deg) scale(1);
+}
+
+
+
+.quizFooter {
+    position: sticky;
+    /* ページ最下部に“貼り付く” */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    box-sizing: border-box;
+    background:
+        linear-gradient(to top, rgba(209, 171, 116, 0.94), rgba(209, 171, 116, 0.88) 40%, rgba(209, 171, 116, 0));
+    backdrop-filter: blur(6px);
+    /* iOSで半透明の上にのせる時の視認性UP（対応ブラウザのみ） */
+}
+
+/* iOSのセーフエリア対応のための余白（未対応ブラウザでも害なし） */
+@supports (padding: max(0px)) {
+    .quizFooter {
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
+    }
+}
+
+/* ===== 送信アクション（Q4の下に配置） ===== */
+.quizActions {
+    width: min(94vw, 720px);
+    margin: 16px auto 48px;
+    /* 上の余白/下の余白はお好みで */
+    display: block;
+    text-align: center;
+}
+
+.quizSubmit {
+    width: 65%;
+    max-width: 720px;
+    height: 53px;
+    border: 0;
+    border-radius: 12px;
+
+    background: #F3EADC;
+    color: #593618;
+
+    font: 700 21px/1 "Noto Sans JP", "Hiragino Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    letter-spacing: .02em;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, .18);
+    cursor: pointer;
+    transition: transform .12s ease, filter .12s ease, box-shadow .12s ease, background-color .12s ease;
+}
+
+.quizSubmit:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 24px rgba(0, 0, 0, .22);
+}
+
+.quizSubmit:active:not(:disabled) {
+    transform: scale(.985);
+    filter: brightness(.98);
+}
+
+/* 無効時（未回答のとき） */
+.quizSubmit:disabled {
+    background: #F3EADC;
+    color: #593618;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: .85;
+}
+
+.qcard__choices::after {
+    content: "";
+    display: block;
+    grid-column: 1 / -1;
+    height: 1px;
+    background: #949494;
+    pointer-events: none;
+    /* ← 重要 */
+}
+
+/* ボタン側を前面へ & クリック通す */
+.quizActions {
+    position: relative;
+    z-index: 2;
+}
+
+.quizSubmit {
+    position: relative;
+    z-index: 2;
+    pointer-events: auto;
+}
+
+@media (max-width: 420px) {
+    .quizSubmit {
+        height: 48px;
+    }
+}
+
+
+@media (max-width: 420px) {
+    .qcard {
+        padding: 16px 12px 20px;
+    }
+
+    .qcard__head {
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .qcard__no {
+        font-size: 24px;
+    }
+
+    .qcard__title {
+        font-size: clamp(16px, 4.6vw, 20px);
+    }
+
+    .qcard__choices {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    /* 1列に */
+    .choice__pill {
+        min-height: 64px;
+    }
+}

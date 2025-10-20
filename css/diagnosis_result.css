@@ -1,0 +1,168 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
+    background: #D1AB74;
+    color: #111;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+
+.hdr {
+    position: relative;
+    margin-top: 68px;
+    height: 36px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.hdr .hdr-text {
+    margin: 0;
+    line-height: 36px;
+    color: #000;
+    text-align: center;
+    font-family: "Rounded Mplus 1c Bold";
+    font-size: 25px;
+    font-weight: 700;
+}
+
+/* 罫線は高さ36pxの“下端”に固定 */
+.hdr .hdr-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #000;
+    border: 0;
+    margin: 0;
+}
+
+
+.result {
+    width: min(92vw, 480px);
+    margin: 32px auto 64px;
+}
+
+/* 円と中のテキスト */
+.resultHero {
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.resultHero__circle {
+    width: clamp(240px, 70vw, 420px);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: #E1E1E1;
+    /* モックの薄いグレー */
+    /* 影が欲しければ↓を有効化
+  box-shadow: 0 10px 18px rgba(0,0,0,.12);
+  */
+}
+
+.resultHero__name {
+    position: absolute;
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(40px, 10vw, 72px);
+    line-height: 1;
+    letter-spacing: .02em;
+    color: #000;
+    text-align: center;
+}
+
+/* タイトル＆本文 */
+.resultBody {
+    text-align: center;
+    margin-top: clamp(28px, 6vh, 56px);
+}
+
+.resultBody__title {
+    margin: 0 0 20px;
+    font-weight: 800;
+    font-size: clamp(28px, 6.5vw, 40px);
+    line-height: 1.2;
+    color: #000;
+}
+
+.resultBody__desc {
+    display: grid;
+    gap: 14px;
+    /* 段落間 */
+}
+
+.resultBody__desc p {
+    margin: 0;
+    font-weight: 700;
+    font-size: clamp(16px, 4.5vw, 22px);
+    line-height: 1.9;
+    /* 画像に近いゆったり感 */
+    color: #000;
+}
+
+.resultActions {
+    width: min(92vw, 480px);
+    margin: 28px auto 56px;
+    /* 本文との距離/下の余白 */
+    display: grid;
+    place-items: center;
+}
+
+.backBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 240px;
+    height: 48px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 18px;
+    background: #4E331C;
+    /* 濃い茶 (#593618でもOK) */
+    color: #fff;
+    text-decoration: none;
+    font: 800 20px/1.1 "Noto Sans JP", "Hiragino Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    letter-spacing: .02em;
+    box-shadow: 0 8px 14px rgba(0, 0, 0, .18);
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+
+
+.backBtn:active {
+    transform: scale(.985);
+    filter: brightness(.98);
+}
+
+
+/* 小さめ端末での微調整 */
+@media (max-width: 360px) {
+    .backBtn {
+        min-width: 200px;
+        height: 44px;
+        font-size: 18px;
+    }
+}
+
+/* ちょい縮める（小さめ端末） */
+@media (max-width: 360px) {
+    .result {
+        margin-top: 24px;
+    }
+
+    .resultBody__title {
+        margin-bottom: 16px;
+    }
+}

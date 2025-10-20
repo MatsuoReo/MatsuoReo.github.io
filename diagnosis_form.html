@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>チャチャイのチャイ</title>
+    <link rel="stylesheet" href="css/diagnosis_form.css" />
+</head>
+
+<body>
+
+    <header class="hdr" aria-label="ページ見出し">
+        <h1 class="hdr-text">神様診断</h1>
+        <hr class="hdr-line">
+    </header>
+
+    <main class="quiz" role="main" aria-label="神様診断フォーム">
+        <section class="qcard">
+            <header class="qcard__head">
+                <p class="qcard__no">Q1</p>
+                <h2 class="qcard__title">あなたがワクワクするのはどんな時？</h2>
+            </header>
+
+            <form class="qcard__form" aria-labelledby="q1-legend">
+                <fieldset class="qcard__fieldset">
+                    <div class="qcard__choices">
+                        <label class="choice choice--checkleft">
+                            <input type="radio" name="q1" value="idea" />
+                            <span class="choice__pill">新しいことを<br>思いついた時</span>
+                        </label>
+
+                        <label class="choice choice--checkleft">
+                            <input type="radio" name="q1" value="help" />
+                            <span class="choice__pill">人を助けた時<br>ワクワクした時</span>
+                        </label>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+
+        <section class="qcard">
+            <header class="qcard__head">
+                <p class="qcard__no">Q2</p>
+                <h2 class="qcard__title">休みの日つい選びがちな過ごし方は？</h2>
+            </header>
+
+            <form class="qcard__form">
+                <fieldset class="qcard__fieldset">
+                    <div class="qcard__choices">
+                        <label class="choice choice--checkleft">
+                            <input type="radio" name="q2" value="outdoor">
+                            <span class="choice__pill">外へ出て<br>体を動かす</span>
+                        </label>
+
+                        <label class="choice choice--checkleft">
+                            <input type="radio" name="q2" value="indoor">
+                            <span class="choice__pill">家でゆっくり<br>好きなことをする</span>
+                        </label>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+
+        <!-- Q3 -->
+        <section class="qcard">
+            <header class="qcard__head">
+                <p class="qcard__no">Q3</p>
+                <h2 class="qcard__title">仲間に求める一番大事なことは？</h2>
+            </header>
+
+            <form class="qcard__form">
+                <fieldset class="qcard__fieldset">
+                    <div class="qcard__choices">
+                        <label class="choice choice--checkleft">
+                            <input type="radio" name="q3" value="reliable">
+                            <span class="choice__pill">約束を守る<br>信頼できること</span>
+                        </label>
+
+                        <label class="choice choice--checkleft">
+                            <input type="radio" name="q3" value="funny">
+                            <span class="choice__pill">一緒にいて<br>楽しいこと</span>
+                        </label>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+
+        <!-- Q4 -->
+        <section class="qcard">
+            <header class="qcard__head">
+                <p class="qcard__no">Q4</p>
+                <h2 class="qcard__title">どちらかといえば得意なのは？</h2>
+            </header>
+
+            <form class="qcard__form">
+                <fieldset class="qcard__fieldset">
+                    <div class="qcard__choices">
+                        <label class="choice choice--checkleft">
+                            <input type="radio" name="q4" value="plan">
+                            <span class="choice__pill">計画を立てて<br>コツコツ進める</span>
+                        </label>
+
+                        <label class="choice choice--checkleft">
+                            <input type="radio" name="q4" value="improvise">
+                            <span class="choice__pill">状況に合わせて<br>柔軟に動く</span>
+                        </label>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+
+        <!-- Q4 の直後に置く -->
+        <section class="quizActions" data-next="diagnosis_result.html" aria-label="診断の送信">
+            <button class="quizSubmit" id="quizSubmitBtn" type="button">診断結果</button>
+        </section>
+
+    </main>
+    <script src="js/app.js" defer></script>
+
+</body>
+
+</html>
