@@ -24,11 +24,16 @@ body {
     display: grid;
     justify-items: center;
     align-items: center;
+    --hdr-gap: 6px;
+    /* ← ここだけ変えればOK */
+    height: calc(36px + var(--hdr-gap));
+    /* 元の36pxに“足す”だけ */
 }
 
 .hdr .hdr-text {
     margin: 0;
     line-height: 36px;
+    padding-bottom: var(--hdr-gap);
     color: #000;
     text-align: center;
     font-family: "Rounded Mplus 1c Bold";
@@ -36,7 +41,7 @@ body {
     font-weight: 700;
 }
 
-/* 罫線は高さ36pxの“下端”に固定 */
+
 .hdr .hdr-line {
     position: absolute;
     bottom: 0;
@@ -49,26 +54,76 @@ body {
 }
 
 
-/* ========== 診断本体ラッパー ========== */
+.hdr__back {
+    position: absolute;
+    left: 12px;
+    /* 画面左からの余白 */
+    top: 50%;
+    transform: translateY(calc(-50% - var(--hdr-gap) / 2));
+    /* 上の --hdr-gap を考慮して垂直中央に見えるように */
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    /* タップ領域 */
+    height: 36px;
+    border-radius: 50%;
+
+    color: #000;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+.hdr__back:active {
+    filter: brightness(.95);
+}
+
+.hdr__backIcon {
+    width: 28px;
+    /* 24 → 28 */
+    height: 28px;
+    display: block;
+}
+
+.hdr__backIcon path {
+    stroke-width: 3;
+    /* 2.4 → 3 */
+}
+
 .quiz {
     width: min(94vw, 720px);
     margin: 0px auto 96px;
-    /* 下は余白広め（フッター想定があれば調整） */
     display: grid;
     gap: 0px;
 }
 
-/* ========== 質問カード ========== */
 .qcard {
     padding-top: 13px;
 }
 
-
 .qcard__head {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
     align-items: center;
     gap: 29px;
+}
+
+.qcard__title {
+    margin: 0;
+    display: block;
+    text-align: left;
+    font-family: "Noto Sans";
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.4;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    min-width: 0;
+    overflow-wrap: break-word;
 }
 
 .qcard__no {
@@ -82,22 +137,6 @@ body {
     text-align: center;
     font-family: "Noto Sans";
     font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 50px;
-}
-
-.qcard__title {
-    display: flex;
-    width: 306px;
-    height: 22px;
-    flex-direction: column;
-    justify-content: center;
-    flex-shrink: 0;
-    color: #000;
-    text-align: center;
-    font-family: "Noto Sans";
-    font-size: 18px;
     font-style: normal;
     font-weight: 700;
     line-height: 50px;
@@ -117,7 +156,6 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 29px;
-    /* ボタン間の隙間 */
 }
 
 .choice input {
@@ -128,12 +166,14 @@ body {
 
 .choice__pill {
     position: relative;
+    line-height: 1.6;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 72px;
-    padding: 14px 12px;
+    min-height: 76px;
+    padding: 16px 14px;
     text-align: center;
+
     border-color: #593618;
     background: #F3EADC;
     color: #593618;
@@ -142,10 +182,20 @@ body {
     box-shadow: 0 6px 12px rgba(0, 0, 0, .12);
     cursor: pointer;
     user-select: none;
-    font: 700 12px/1.5 "Noto Sans JP", "Hiragino Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+    font-weight: 700;
+    font-family: "Noto Sans JP", "Hiragino Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
     transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background-color .12s ease;
 }
 
+@media (max-width: 360px) {
+    .choice__pill {
+        font-size: clamp(14px, 4.4vw, 17px);
+        min-height: 72px;
+        padding: 14px 12px;
+    }
+}
 
 .choice:active .choice__pill {
     transform: scale(.98);
@@ -158,7 +208,6 @@ body {
     box-shadow: 0 12px 18px rgba(0, 0, 0, .16);
 }
 
-
 .qcard__choices:has(input:checked) .choice__pill {
     opacity: .45;
     transition: opacity .12s ease;
@@ -168,11 +217,9 @@ body {
     opacity: 1;
 }
 
-
 .choice--checkleft .choice__pill {
     position: relative;
 }
-
 
 .choice--checkleft .choice__pill::before,
 .choice--checkleft .choice__pill::after {
@@ -183,67 +230,55 @@ body {
     transition: opacity .12s ease, transform .12s ease;
 }
 
-
 .choice--checkleft .choice__pill::after {
     content: "";
-    position: absolute;
-    left: 28px;
-    top: 50%;
     width: 12px;
     height: 7px;
     border-left: 3px solid #593618;
     border-bottom: 3px solid #593618;
     transform: translate(-50%, -50%) rotate(-45deg) scale(.8);
     opacity: 0;
-    transition: opacity .12s ease, transform .12s ease;
 }
-
-
-.qcard__choices::after {
-    content: "";
-    display: block;
-    grid-column: 1 / -1;
-    /* 2カラムでも1カラムでも横幅いっぱいに */
-    height: 1px;
-    background: #949494;
-}
-
 
 .choice--checkleft input:checked+.choice__pill::after {
     opacity: 1;
     transform: translate(-50%, -50%) rotate(-45deg) scale(1);
 }
 
-
+/* 区切り線 */
+.qcard__choices::after {
+    content: "";
+    display: block;
+    grid-column: 1 / -1;
+    height: 1px;
+    background: #949494;
+    pointer-events: none;
+}
 
 .quizFooter {
     position: sticky;
-    /* ページ最下部に“貼り付く” */
     bottom: 0;
     left: 0;
     width: 100%;
     padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
     box-sizing: border-box;
-    background:
-        linear-gradient(to top, rgba(209, 171, 116, 0.94), rgba(209, 171, 116, 0.88) 40%, rgba(209, 171, 116, 0));
+    background: linear-gradient(to top, rgba(209, 171, 116, 0.94), rgba(209, 171, 116, 0.88) 40%, rgba(209, 171, 116, 0));
     backdrop-filter: blur(6px);
-    /* iOSで半透明の上にのせる時の視認性UP（対応ブラウザのみ） */
 }
 
-/* iOSのセーフエリア対応のための余白（未対応ブラウザでも害なし） */
 @supports (padding: max(0px)) {
     .quizFooter {
         padding-bottom: max(12px, env(safe-area-inset-bottom));
     }
 }
 
-/* ===== 送信アクション（Q4の下に配置） ===== */
 .quizActions {
     width: min(94vw, 720px);
     margin: 16px auto 48px;
-    /* 上の余白/下の余白はお好みで */
     display: block;
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
 .quizSubmit {
@@ -252,15 +287,17 @@ body {
     height: 53px;
     border: 0;
     border-radius: 12px;
-
     background: #F3EADC;
     color: #593618;
-
     font: 700 21px/1 "Noto Sans JP", "Hiragino Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     letter-spacing: .02em;
     box-shadow: 0 10px 18px rgba(0, 0, 0, .18);
     cursor: pointer;
     transition: transform .12s ease, filter .12s ease, box-shadow .12s ease, background-color .12s ease;
+
+    position: relative;
+    z-index: 2;
+    pointer-events: auto;
 }
 
 .quizSubmit:hover:not(:disabled) {
@@ -273,7 +310,6 @@ body {
     filter: brightness(.98);
 }
 
-/* 無効時（未回答のとき） */
 .quizSubmit:disabled {
     background: #F3EADC;
     color: #593618;
@@ -282,26 +318,78 @@ body {
     opacity: .85;
 }
 
-.qcard__choices::after {
-    content: "";
-    display: block;
-    grid-column: 1 / -1;
-    height: 1px;
-    background: #949494;
-    pointer-events: none;
-    /* ← 重要 */
+:root {
+    --tabbar-bg: #D1AB74;
+    --tabbar-fg: #111;
+    --tabbar-active: #000;
+    --tabbar-border: #000;
+    --tabbar-height: 48px;
 }
 
-/* ボタン側を前面へ & クリック通す */
-.quizActions {
-    position: relative;
-    z-index: 2;
+.tabbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--tabbar-bg);
+    color: var(--tabbar-fg);
+    z-index: 1000;
+    padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -1px 0 var(--tabbar-border);
 }
 
-.quizSubmit {
-    position: relative;
-    z-index: 2;
-    pointer-events: auto;
+.tabbar__inner {
+    max-width: 720px;
+    margin: 0 auto;
+    min-height: calc(var(--tabbar-height) + env(safe-area-inset-bottom));
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 14px;
+    padding: 6px 10px 8px;
+}
+
+.tabbar__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+    min-width: 0;
+    gap: 4px;
+}
+
+.tabbar__ico {
+    width: 24px;
+    height: 24px;
+}
+
+.tabbar__label {
+    font: 700 13px/1.1 "Noto Sans JP", "Hiragino Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+}
+
+@media (max-width: 380px) {
+    .tabbar__ico {
+        width: 28px;
+        height: 28px;
+    }
+
+    .tabbar__label {
+        font-size: 14px;
+        letter-spacing: 0.02em;
+
+    }
+}
+
+main,
+.page,
+.content {
+    padding-bottom: calc(var(--tabbar-height) + 8px + env(safe-area-inset-bottom));
 }
 
 @media (max-width: 420px) {
@@ -310,23 +398,9 @@ body {
     }
 }
 
-
 @media (max-width: 420px) {
     .qcard {
         padding: 16px 12px 20px;
-    }
-
-    .qcard__head {
-        gap: 10px;
-        margin-bottom: 16px;
-    }
-
-    .qcard__no {
-        font-size: 24px;
-    }
-
-    .qcard__title {
-        font-size: clamp(16px, 4.6vw, 20px);
     }
 
     .qcard__choices {
@@ -334,8 +408,26 @@ body {
         gap: 14px;
     }
 
-    /* 1列に */
     .choice__pill {
         min-height: 64px;
+    }
+}
+
+@media (max-width: 420px) {
+    .qcard__no {
+        font-size: 16px;
+        line-height: 1;
+        height: auto;
+        align-self: center;
+    }
+
+    .qcard__title {
+        align-self: center;
+    }
+
+    .qcard__head {
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 18px;
     }
 }

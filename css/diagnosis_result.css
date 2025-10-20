@@ -24,11 +24,16 @@ body {
     display: grid;
     justify-items: center;
     align-items: center;
+    --hdr-gap: 6px;
+    /* ← ここだけ変えればOK */
+    height: calc(36px + var(--hdr-gap));
+    /* 元の36pxに“足す”だけ */
 }
 
 .hdr .hdr-text {
     margin: 0;
     line-height: 36px;
+    padding-bottom: var(--hdr-gap);
     color: #000;
     text-align: center;
     font-family: "Rounded Mplus 1c Bold";
@@ -36,7 +41,7 @@ body {
     font-weight: 700;
 }
 
-/* 罫線は高さ36pxの“下端”に固定 */
+
 .hdr .hdr-line {
     position: absolute;
     bottom: 0;
@@ -49,12 +54,48 @@ body {
 }
 
 
+.hdr__back {
+    position: absolute;
+    left: 12px;
+    /* 画面左からの余白 */
+    top: 50%;
+    transform: translateY(calc(-50% - var(--hdr-gap) / 2));
+    /* 上の --hdr-gap を考慮して垂直中央に見えるように */
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    /* タップ領域 */
+    height: 36px;
+    border-radius: 50%;
+
+    color: #000;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+.hdr__back:active {
+    filter: brightness(.95);
+}
+
+.hdr__backIcon {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+
+.hdr__backIcon path {
+    stroke-width: 3;
+}
+
 .result {
     width: min(92vw, 480px);
     margin: 32px auto 64px;
 }
 
-/* 円と中のテキスト */
 .resultHero {
     position: relative;
     display: grid;
@@ -144,6 +185,82 @@ body {
 .backBtn:active {
     transform: scale(.985);
     filter: brightness(.98);
+}
+
+
+:root {
+    --tabbar-bg: #D1AB74;
+    --tabbar-fg: #111;
+    --tabbar-active: #000;
+    --tabbar-border: #000;
+    --tabbar-height: 48px;
+}
+
+.tabbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--tabbar-bg);
+    color: var(--tabbar-fg);
+    z-index: 1000;
+    padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -1px 0 var(--tabbar-border);
+}
+
+.tabbar__inner {
+    max-width: 720px;
+    margin: 0 auto;
+    min-height: calc(var(--tabbar-height) + env(safe-area-inset-bottom));
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 14px;
+    padding: 6px 10px 8px;
+}
+
+.tabbar__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+    min-width: 0;
+    gap: 4px;
+}
+
+.tabbar__ico {
+    width: 24px;
+    height: 24px;
+}
+
+.tabbar__label {
+    font: 700 13px/1.1 "Noto Sans JP", "Hiragino Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+
+}
+
+@media (max-width: 380px) {
+    .tabbar__ico {
+        width: 28px;
+        height: 28px;
+    }
+
+    .tabbar__label {
+        font-size: 14px;
+        letter-spacing: 0.02em;
+
+    }
+}
+
+main,
+.page,
+.content {
+    padding-bottom: calc(var(--tabbar-height) + 8px + env(safe-area-inset-bottom));
 }
 
 

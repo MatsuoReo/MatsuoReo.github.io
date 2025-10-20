@@ -9,8 +9,13 @@
 </head>
 
 <body>
-
-    <header class="hdr" aria-label="ページ見出し">
+ <header class="hdr" aria-label="ページ見出し">
+        <a class="hdr__back" href="javascript:void(0)" aria-label="前のページに戻る" onclick="history.back();">
+            <svg class="hdr__backIcon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </a>
         <h1 class="hdr-text">神様診断</h1>
         <hr class="hdr-line">
     </header>
@@ -35,6 +40,25 @@
         <div class="resultActions">
             <a href="main.html" class="backBtn" role="button" aria-label="Homeへ戻る">Homeへ戻る ＞</a>
         </div>
+
+        <nav class="tabbar" aria-label="フッターナビ">
+            <div class="tabbar__inner">
+                <a class="tabbar__item" href="diagnosis_chai.html">
+                    <img class="tabbar__ico" src="img/ico_chai_white.png" alt="" aria-hidden="true">
+                    <span class="tabbar__label">チャイ</span>
+                </a>
+
+                <a class="tabbar__item is-active" href="main.html" aria-current="page">
+                    <img class="tabbar__ico" src="img/ico_home_white.png" alt="" aria-hidden="true">
+                    <span class="tabbar__label">Home</span>
+                </a>
+
+                <a class="tabbar__item" href="diagnosis_form.html">
+                    <img class="tabbar__ico" src="img/ico_temple_white.png" alt="" aria-hidden="true">
+                    <span class="tabbar__label">診断</span>
+                </a>
+            </div>
+        </nav>
 
     </main>
 

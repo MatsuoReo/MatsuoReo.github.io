@@ -16,7 +16,6 @@ body {
     position: relative;
 }
 
-
 .hdr {
     position: relative;
     margin-top: 68px;
@@ -24,17 +23,23 @@ body {
     display: grid;
     justify-items: center;
     align-items: center;
+    --hdr-gap: 6px;
+    /* ← ここだけ変えればOK */
+    height: calc(36px + var(--hdr-gap));
+    /* 元の36pxに“足す”だけ */
 }
 
 .hdr .hdr-text {
     margin: 0;
     line-height: 36px;
+    padding-bottom: var(--hdr-gap);
     color: #000;
     text-align: center;
     font-family: "Rounded Mplus 1c Bold";
     font-size: 25px;
     font-weight: 700;
 }
+
 
 /* 罫線は高さ36pxの“下端”に固定 */
 .hdr .hdr-line {
@@ -48,8 +53,9 @@ body {
     margin: 0;
 }
 
-
-
+/* ============================= */
+/* ENB（円形の大ボタン）        */
+/* ============================= */
 .enb {
     position: relative;
     margin: 24px auto 0;
@@ -72,17 +78,14 @@ body {
     color: inherit;
     padding: 24px;
     transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
-
 }
-
 
 .enbBtn:active {
     transform: scale(.98);
     filter: brightness(.98);
 }
 
-
-/* タイポ（spanで見出し/本文風に） */
+/* タイポ（見出し/本文風） */
 .enb__ttl {
     display: flex;
     position: absolute;
@@ -119,7 +122,6 @@ body {
     line-height: 21px;
 }
 
-
 .enb__panel {
     position: absolute;
     top: 220px;
@@ -146,7 +148,9 @@ body {
     line-height: 31px;
 }
 
-
+/* ============================= */
+/* Cards                         */
+/* ============================= */
 :root {
     --card-bg: #8E6940;
     --card-radius: 12px;
@@ -162,8 +166,6 @@ body {
     gap: 7px;
     justify-content: center;
 }
-
-
 
 .card {
     width: 183px;
@@ -186,13 +188,6 @@ body {
 .card:active {
     transform: scale(.98);
 }
-
-
-
-.card:active {
-    transform: scale(.98);
-}
-
 
 .card__ttl {
     display: flex;
@@ -221,13 +216,11 @@ body {
     font-size: 12px;
     font-style: normal;
     font-weight: 700;
-    line-height: 18px;
     margin: 0;
     line-height: 1.2;
 }
 
 .card__btn {
-
     display: inline-flex;
     width: 163px;
     height: 28px;
@@ -242,17 +235,13 @@ body {
     background: #F3EADC;
     pointer-events: none;
     cursor: default;
-    text-decoration: none;
-    color: var(--pill-fg);
-    margin: 0px;
+    margin: 0;
 }
-
 
 .card__btn:active {
     transform: scale(.98);
     filter: brightness(.98);
 }
-
 
 .card__btnTxt {
     display: inline-flex;
@@ -270,8 +259,6 @@ body {
     line-height: 50px;
 }
 
-
-
 .card__ill {
     justify-self: center;
     align-self: start;
@@ -281,18 +268,12 @@ body {
     margin: 0;
 }
 
-/* ===== タブバー（固定フッター） ===== */
 :root {
     --tabbar-bg: #D1AB74;
-    /* 背景（砂色） */
     --tabbar-fg: #111;
-    /* 文字/アイコン色 */
     --tabbar-active: #000;
-    /* アクティブ色 */
-    --tabbar-border: #3a2a14;
-    /* 上罫線 */
-    --tabbar-height: 84px;
-    /* 本体の高さ（必要なら調整） */
+    --tabbar-border: #000;
+    --tabbar-height: 48px;
 }
 
 .tabbar {
@@ -303,22 +284,19 @@ body {
     background: var(--tabbar-bg);
     color: var(--tabbar-fg);
     z-index: 1000;
-    /* iOSセーフエリア対応 */
     padding-bottom: env(safe-area-inset-bottom);
     box-shadow: 0 -1px 0 var(--tabbar-border);
-    /* 上の細い線 */
 }
 
 .tabbar__inner {
     max-width: 720px;
-    /* 中央寄せ（レイアウト幅に合わせて） */
     margin: 0 auto;
-    height: calc(var(--tabbar-height) + env(safe-area-inset-bottom));
+    min-height: calc(var(--tabbar-height) + env(safe-area-inset-bottom));
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
-    gap: 8px;
-    padding: 10px 16px 10px;
+    gap: 14px;
+    padding: 6px 10px 8px;
 }
 
 .tabbar__item {
@@ -330,30 +308,19 @@ body {
     color: inherit;
     -webkit-tap-highlight-color: transparent;
     min-width: 0;
-    gap: 6px;
+    gap: 4px;
 }
-
-
 
 .tabbar__ico {
-    width: 32px;
-    height: 32px;
-    display: block;
-    object-fit: contain;
-    /* 画像の縦横比を保持して収める */
+    width: 24px;
+    height: 24px;
 }
-
 
 .tabbar__label {
-    font: 700 14px/1.1 "Noto Sans JP", "Hiragino Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font: 700 13px/1.1 "Noto Sans JP", "Hiragino Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     text-align: center;
+    letter-spacing: 0.03em;
     white-space: nowrap;
-}
-
-/* アクティブタブの強調 */
-.tabbar__item.is-active {
-    color: var(--tabbar-active);
-    filter: brightness(0.95);
 }
 
 @media (max-width: 380px) {
@@ -361,15 +328,19 @@ body {
         width: 28px;
         height: 28px;
     }
+
+    .tabbar__label {
+        font-size: 14px;
+        letter-spacing: 0.02em;
+
+    }
 }
 
-/* ===== コンテンツがタブバーの下に隠れないよう、下余白を確保 ===== */
 main,
 .page,
 .content {
-    padding-bottom: calc(var(--tabbar-height) + 12px + env(safe-area-inset-bottom));
+    padding-bottom: calc(var(--tabbar-height) + 8px + env(safe-area-inset-bottom));
 }
-
 
 @media (max-width: 520px) {
     .cards {
